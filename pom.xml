@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>io.github.jmgarridopaz.taskmanagement</groupId>
+	<artifactId>task-management</artifactId>
+	<version>1.0.0</version>
+
+	<name>Task Management</name>
+
+	<packaging>jar</packaging>
+
+	<properties>
+		<!-- Char encoding -->
+		<project.encondig>UTF-8</project.encondig>
+		<project.build.sourceEncoding>${project.encondig}</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>${project.encondig}</project.reporting.outputEncoding>
+		<!-- Java -->
+		<java.version>1.8</java.version>
+		<!-- Compiler Plugin -->
+		<mavenCompilerPlugin.version>3.7.0</mavenCompilerPlugin.version>
+		<!-- Spring Boot Maven Plugin -->
+		<spring.boot.maven.plugin.version>2.4.0</spring.boot.maven.plugin.version>
+		<!-- JUnit 5 -->
+		<junit.jupiter.engine.version>5.7.0</junit.jupiter.engine.version>
+		<junit.platform.version>1.7.0</junit.platform.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.jupiter.engine.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<version>${junit.platform.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-reporting</artifactId>
+			<version>${junit.platform.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- Compiler Plugin configuration -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${mavenCompilerPlugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<verbose>false</verbose>
+					<optimize>true</optimize>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+			<plugin>
+	    		<groupId>org.springframework.boot</groupId>
+	    		<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring.boot.maven.plugin.version}</version>
+	    		<executions>
+			        <execution>
+			            <goals>
+			                <goal>repackage</goal>
+			            </goals>
+			            <configuration>
+			                <classifier>spring-boot</classifier>
+			                <mainClass>
+			                  io.github.jmgarridopaz.taskmanagement.startup.TaskManagement
+			                </mainClass>
+			            </configuration>
+			        </execution>
+			    </executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
