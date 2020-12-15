@@ -1,9 +1,7 @@
 # task-management
 
 
-
-# >>>>>>>>>>>>>>>>>>>> IN PROGRESS <<<<<<<<<<<<<<<<<<<<<
-
+# >>>>>>>>>> IN PROGRESS <<<<<<<<<<
 
 
 Simple code example for illustrating the article https://jmgarridopaz.github.io/content/therightboundary.html
