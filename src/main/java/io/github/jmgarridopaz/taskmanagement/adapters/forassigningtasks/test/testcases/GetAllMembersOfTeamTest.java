@@ -41,7 +41,7 @@ public class GetAllMembersOfTeamTest {
 	}
 	
 
-	private void givenTheFollowingDepartmentsAndEmployees(String[][] departments, String[][] employees) {
+	private void givenTheFollowingDepartmentsAndEmployees(List<Department> departments, List<Employee> employees) {
 		System.out.println("GIVEN the following departments exist [id,name,upperDepartmentId,bossId]:");
 		System.out.println(arraysToString(departments));
 		System.out.println("AND the following employees exist [id,fullName,alias,email,departmentId]:");
