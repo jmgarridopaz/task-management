@@ -26,6 +26,14 @@ public class Department {
 
 	public String upperDepartmentId() {
 		return upperDepartmentId;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+							"Department [id=%s, name=%s, upperDepartmentId=%s]",
+							id, name, upperDepartmentId
+							);
 	}	
-	
+
 }

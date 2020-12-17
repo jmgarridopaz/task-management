@@ -8,21 +8,17 @@ import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teammemberservice.ForGe
 
 public class ForGettingEmployeesStubAdapter implements ForGettingEmployees {
 
-	private final String[][] employees;
+	private final Employee[] employees;
 	
-	/*
-	 * Array of employees
-	 * Each employee is an array too with 6 strings: [id,firstName,lastName,email,managerId,departmentId]
-	 */
-	public ForGettingEmployeesStubAdapter ( String[] ... employees ) {
+	public ForGettingEmployeesStubAdapter ( Employee ... employees ) {
 		this.employees = employees;
 	}
 
 	@Override
 	public List<Employee> getAllEmployees() {
 		List<Employee> employeeList = new ArrayList<Employee>();
-		for ( String[] employee : this.employees ) {
-			employeeList.add ( new Employee(employee[0],employee[1],employee[2],employee[3],employee[4],employee[5]) );
+		for ( Employee employee : this.employees ) {
+			employeeList.add ( employee );
 		}
 		return employeeList;
 	}

@@ -1,11 +1,10 @@
 package io.github.jmgarridopaz.taskmanagement.hexagon.applicationlayer;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+
 import io.github.jmgarridopaz.taskmanagement.hexagon.domain.ForStoringTasks;
 import io.github.jmgarridopaz.taskmanagement.hexagon.domain.Team;
-import io.github.jmgarridopaz.taskmanagement.hexagon.domain.TeamGroup;
 import io.github.jmgarridopaz.taskmanagement.hexagon.domain.TeamGroupService;
 import io.github.jmgarridopaz.taskmanagement.hexagon.domain.TeamMember;
 import io.github.jmgarridopaz.taskmanagement.hexagon.domain.TeamMemberService;
@@ -28,7 +27,7 @@ public class TaskManager implements ForAssigningTasks {
 	@Override
 	public TeamWithMembers getAllMembersOfTeam() {
 		Team team = this.teamGroupService.getTeam();
-		List<TeamMember> teamMembers = this.teamMemberService.getAll();
+		TeamMember[] teamMembers = this.teamMemberService.getAll().toArray(new TeamMember[0]);
 		return new TeamWithMembers(team, teamMembers);
 	}
 

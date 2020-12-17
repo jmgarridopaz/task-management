@@ -8,26 +8,26 @@ import java.util.UUID;
  */
 public class Task {
 
-		String id;
-		String title;
-		LocalDate deliveryDate;
-		String teamMemberId;
+	private String id;
+	private String title;
+	private LocalDate deliveryDate;
+	private String teamMemberId;
 		
-		private Task (String id, String title, LocalDate deliveryDate, String teamMemberId ) {
-			this.id = id;
-			this.title = title;
-			this.deliveryDate = deliveryDate;
-			this.teamMemberId = teamMemberId;
-		}
+	private Task (String id, String title, LocalDate deliveryDate, String teamMemberId ) {
+		this.id = id;
+		this.title = title;
+		this.deliveryDate = deliveryDate;
+		this.teamMemberId = teamMemberId;
+	}
 
-		public static Task assignToTeamMember (String teamMemberId, String taskTitle, LocalDate taskDeliveryDate ) {
-			String taskId = UUID.randomUUID().toString();
-			return new Task  ( taskId, taskTitle, taskDeliveryDate, teamMemberId);
-		}
+	public static Task assignToTeamMember (String teamMemberId, String taskTitle, LocalDate taskDeliveryDate ) {
+		String taskId = UUID.randomUUID().toString();
+		return new Task ( taskId, taskTitle, taskDeliveryDate, teamMemberId );
+	}
 
-		@Override
-		public String toString() {
-			return String.format("Task [id=%s, title=%s, deliveryDate=%s, teamMemberId=%s]", id, title, deliveryDate, teamMemberId);
-		}
+	@Override
+	public String toString() {
+		return String.format("Task [id=%s, title=%s, deliveryDate=%s, teamMemberId=%s]", id, title, deliveryDate, teamMemberId);
+	}
 
 }

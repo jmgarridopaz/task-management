@@ -24,7 +24,7 @@ public class TeamMemberGetter implements TeamMemberService {
 			String teamMemberEmail = employee.email();
 			String groupId = employee.departmentId();
 			TeamMember teamMember = new TeamMember(teamMemberId, teamMemberName, teamMemberEmail, groupId);
-			teamMembers .add ( teamMember );
+			teamMembers.add ( teamMember );
 		}
 		return teamMembers;
 	}

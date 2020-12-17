@@ -1,5 +1,6 @@
 package io.github.jmgarridopaz.taskmanagement.hexagon.domain;
 
+import java.util.Objects;
 
 /*
  * Value Object
@@ -33,7 +34,32 @@ public class TeamMember {
 
 	public String groupId() {
 		return groupId;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(email, groupId, id, name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof TeamMember)) {
+			return false;
+		}
+		TeamMember other = (TeamMember) obj;
+		return Objects.equals(email, other.email) && Objects.equals(groupId, other.groupId)
+				&& Objects.equals(id, other.id) && Objects.equals(name, other.name);
+	}
+
+	@Override
+	public String toString() {
+		return String.format("TeamMember [id=%s, name=%s, email=%s, groupId=%s]", id, name, email, groupId);
 	}	
 	
 }
-
