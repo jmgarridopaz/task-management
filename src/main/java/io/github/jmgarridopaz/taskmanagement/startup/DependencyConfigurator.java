@@ -5,10 +5,10 @@ import io.github.jmgarridopaz.taskmanagement.adapters.forassigningtasks.test.sut
 import io.github.jmgarridopaz.taskmanagement.adapters.forgettingdepartments.stub.ForGettingDepartmentsStubAdapter;
 import io.github.jmgarridopaz.taskmanagement.adapters.forgettingemployees.stub.ForGettingEmployeesStubAdapter;
 import io.github.jmgarridopaz.taskmanagement.hexagon.Hexagon;
-import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teamgroupservice.Department;
-import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teamgroupservice.ForGettingDepartments;
 import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teammemberservice.Employee;
 import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teammemberservice.ForGettingEmployees;
+import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teamservice.Department;
+import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teamservice.ForGettingDepartments;
 import io.github.jmgarridopaz.taskmanagement.hexagon.applicationlayer.ForAssigningTasks;
 import io.github.jmgarridopaz.taskmanagement.hexagon.domain.ForStoringTasks;
 

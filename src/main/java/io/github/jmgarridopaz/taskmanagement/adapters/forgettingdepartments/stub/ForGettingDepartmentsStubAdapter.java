@@ -1,9 +1,7 @@
 package io.github.jmgarridopaz.taskmanagement.adapters.forgettingdepartments.stub;
 
-import java.util.ArrayList;
-import java.util.List;
-import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teamgroupservice.Department;
-import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teamgroupservice.ForGettingDepartments;
+import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teamservice.Department;
+import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teamservice.ForGettingDepartments;
 
 
 public class ForGettingDepartmentsStubAdapter implements ForGettingDepartments {
@@ -15,12 +13,13 @@ public class ForGettingDepartmentsStubAdapter implements ForGettingDepartments {
 	}
 
 	@Override
-	public List<Department> getAllDepartments() {
-		List<Department> departmentList = new ArrayList<Department>();
+	public Department getDepartmentFromId(String departmentId) {
 		for ( Department department : this.departments ) {
-			departmentList.add(department);
+			if ( department.id().equals(departmentId) ) {
+				return department;
+			}
 		}
-		return departmentList;
+		return null;
 	}
-	
+
 }

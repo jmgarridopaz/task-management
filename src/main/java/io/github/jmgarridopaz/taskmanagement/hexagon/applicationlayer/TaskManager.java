@@ -5,19 +5,19 @@ import java.util.List;
 
 import io.github.jmgarridopaz.taskmanagement.hexagon.domain.ForStoringTasks;
 import io.github.jmgarridopaz.taskmanagement.hexagon.domain.Team;
-import io.github.jmgarridopaz.taskmanagement.hexagon.domain.TeamGroupService;
+import io.github.jmgarridopaz.taskmanagement.hexagon.domain.TeamService;
 import io.github.jmgarridopaz.taskmanagement.hexagon.domain.TeamMember;
 import io.github.jmgarridopaz.taskmanagement.hexagon.domain.TeamMemberService;
 
 
 public class TaskManager implements ForAssigningTasks {
 
-	private final TeamGroupService teamGroupService;
+	private final TeamService teamGroupService;
 	private final TeamMemberService teamMemberService;
 	private final ForStoringTasks taskRepository;
 
 	
-	public TaskManager(TeamGroupService teamGroupService, TeamMemberService teamMemberService, ForStoringTasks taskRepository) {
+	public TaskManager(TeamService teamGroupService, TeamMemberService teamMemberService, ForStoringTasks taskRepository) {
 		this.teamGroupService = teamGroupService;
 		this.teamMemberService = teamMemberService;
 		this.taskRepository = taskRepository;
@@ -25,10 +25,9 @@ public class TaskManager implements ForAssigningTasks {
 
 	
 	@Override
-	public TeamWithMembers getAllMembersOfTeam() {
-		Team team = this.teamGroupService.getTeam();
-		TeamMember[] teamMembers = this.teamMemberService.getAll().toArray(new TeamMember[0]);
-		return new TeamWithMembers(team, teamMembers);
+	public List<TeamMember> getAllTeamMembers() {
+		List<TeamMember> teamMembers = this.teamMemberService.getAll();
+		return teamMembers;
 	}
 
 

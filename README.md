@@ -6,27 +6,37 @@
 
 Simple code example for illustrating the article https://jmgarridopaz.github.io/content/therightboundary.html
 
-It has be done quickly so: there's no error checking, no dependency management (just one module, but I take care of dependencies between packages), all types are public, the core domain is simple (not rich), I didn't program all the adapters (just the ones needed for doing a use case test), etc. But those things don't matter now for the topic of the article.
+It has be done quickly so: there's no exception handling, no dependencies between packages (but I take care of them), all types are public, just programmed the code needed to test one use case, ... but those things don't matter now for the topic of the article.
 
-**Task Management** is an application that members of a team can use, for assigning tasks to either another team member or to a group of members.
+**Task Management** is an application, a collaborative tool, that allows members of a team to assign tasks to each other.
 
-This application is going to be used by the employees of a company, which is structured in departments.
+It's going to be used by the employees of a company, which is structured in departments.
 
-We are going to suppose that we have 2 external systems: _Company Structure_, with information about departments; and _Human Resources_, with information about employees. So that we have the following DDD context map:
+We already have 2 existing systems:
 
-![Context Map](context-map.jpg)
+- _Company Structure_, with information about departments
+- _Human Resources_, with information about employees.
 
-- _Company Structure & Task Management contexts integration_: Company Structure is upstream and it offers information about the company and its departments with an OHS/PL (REST API with JSON representation). Task Management is downstream, with an ACL for translating upstream model into downstream model (the company is a team, and departments are groups of team members).
+Our domain knows of concepts like team, members, tasks, ... But in real life we have concepts like departments, employees, ... So our application has to integrate with both external systems, translating concepts from their contexts to our own context.
 
-- _Human Resources & Task Management contexts integration_: Human Resources is upstream and it offers information about employees with an OHS/PL (REST API with JSON representation). Task Management is downstream, with an ACL for translating upstream model into downstream model (employees are team members).
+Using strategic DDD patterns, we have the following context map:
 
-Both integrations will be synchronous, i.e. Task Management context will send a web request and wait for response everytime it needs information from the remote contexts. Another option for integration would be asynchronously, receiving the remote information by listening to events thrown by the upstream contexts, but that's not the topic now.
+![Context Map](context-map.png)
 
-The topic is the following: "DDD infra code (ACL) doesn't match HA infra code (HA adapter)".
+- __Integration with Company Structure system__: "_Company Structure_" context is upstream (U), with an OHS/PL (Open Host Service / Published Language) offering information about departments. This OHS is a HTTP REST API, using JSON as the PL. Our "_Task Management_" context is downstream (D), with an ACL (Anti Corruption Layer) for preventing "_Company Structure_" model leaking into our domain. This ACL accesses "_Company Structure_" API, and translates "_Company Structure_" model into "_Task Management_" model (a department will be a team).
+- __Integration with Human Resources system__: "_Human Resources_" context is upstream (U), with an OHS/PL offering information about employees. This OHS is a HTTP REST API, using JSON as the PL. Our "_Task Management_" context is downstream (D), with an ACL for preventing "_Human Resources_" model leaking into our domain. This ACL accesses "_Human Resources_" API, and translates "_Human Resources_" model into "_Task Management_" model (an employee will be a member of the team corresponding to the department the employee belongs to).
 
-The concept of ACL is wider than the HA adapter, since it does semantic translation besides technological one.
+Both integrations will be synchronous, i.e. "_Task Management_" context will send a web request and wait for response every time it needs information from the remote context.
 
-![Task Management](task-management.png)
+__Implementing "Task Management" context using HA (Hexagonal Architecture)__, we have this drawing showing interfaces, classes and packages from source code:
+
+
+
+
+
+
+
+ACL concept is wider than HA adapter, since it does semantic translation besides technological one.
 
 Once the HA adapter has fetched the concept from the repository (upstream context), the hexagon has to translate it into terms of our domain.
 
@@ -36,24 +46,13 @@ That's what I say, HA is what it is, not what I want it to be.
 
 So if I want to fit DDD into HA, I put that semantic translation inside the hexagon but outside the domain. You are still protecting your domain with a domain service interface.
 
+
+
+![Task Management](task-management.png)
+
+
+
 Regarding tests, this way ACL logic doesn't scape from acceptance tests (business logic tests), since it belongs to the hexagon.
 
 Testing the hexagon in isolation driven by test drivers, mocking external technologies, is one of the main goals of HA, and putting ACL logic outside breaks this.
 
-## Development Environment:
-
-- Java 1.8
-
-- Maven 3.5.4
-
-- Eclipse IDE 2019-12
-
-- Ubuntu 18.04
-
-## Compile & Run:
-
-- Download the repository.
-
-- mvn clean package
-
-- java -jar ./target/task-management-1.0.0-spring-boot.jar

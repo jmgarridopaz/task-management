@@ -1,4 +1,4 @@
-package io.github.jmgarridopaz.taskmanagement.hexagon.acl.teamgroupservice;
+package io.github.jmgarridopaz.taskmanagement.hexagon.acl.teamservice;
 
 
 /*
