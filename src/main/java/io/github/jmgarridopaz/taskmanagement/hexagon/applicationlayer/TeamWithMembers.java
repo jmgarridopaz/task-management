@@ -1,12 +1,9 @@
 package io.github.jmgarridopaz.taskmanagement.hexagon.applicationlayer;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teamgroupservice.Department;
 import io.github.jmgarridopaz.taskmanagement.hexagon.domain.Team;
 import io.github.jmgarridopaz.taskmanagement.hexagon.domain.TeamMember;
 

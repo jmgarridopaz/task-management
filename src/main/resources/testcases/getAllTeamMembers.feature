@@ -1,4 +1,4 @@
-Feature: GET ALL TEAM MEMBERS
+Feature: GET TEAM MEMBERS
 
 	AS
 	an employee
@@ -14,20 +14,23 @@ Scenario: Should return the employees of my department as team members
 
 Given the company has these departments:
 
-| DEP_ID | DEP_NAME  | UPPER_DEP_ID |
-| 1      | Acme      |              |
-| 2      | Marketing | 1            |
+| DEP_ID | DEP_NAME   | DEP_LOCATION | UPPER_DEP_ID |
+| 1      | Acme       | Chicago      |              |
+| 2      | Research   | New York     | 1            |
+| 3      | Accounting | Dallas       | 1            |
 
-And there exists these employees:
+And the company has these employees:
 
-| EMP_ID | EMP_FIRST_NAME | EMP_LAST_NAME | EMP_EMAIL          | IS_MANAGER | DEP_ID |
-| 1      | Juan           | Garrido       | jgarrido@email.com | yes        | 1      |
-| 2      | María          | López         | mlopez@email.com   | no         | 1      |
-| 3      | Jesús          | Pérez         | jperez@email.com   | yes        | 2      |
-| 4      | Alicia         | Lucena        | alucena@email.com  | no         | 2      |
-| 5      | Pedro          | Mateos        | pmateos@email.com  | no         | 2      |
+| EMP_ID | EMP_FIRST_NAME | EMP_LAST_NAME | EMP_EMAIL          | EMP_JOB | EMP_IS_MANAGER | DEP_ID |
+| 1      | Juan           | Garrido       | jgarrido@email.com |         | yes            | 1      |
+| 2      | María          | López         | mlopez@email.com   |         | yes            | 2      |
+| 3      | Jesús          | Pérez         | jperez@email.com   |         | yes            | 3      |
+| 4      | Alicia         | Lucena        | alucena@email.com  |         | no             | 3      |
+| 5      | Pedro          | Mateos        | pmateos@email.com  |         | no             | 3      |
 
-When employee with id '4' asks the app for the members of the team
+And current user id is '4'
+
+When we ask for the members of the team
 
 Then we should get these team members:
 

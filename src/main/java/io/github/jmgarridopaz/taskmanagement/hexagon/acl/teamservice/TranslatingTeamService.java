@@ -9,17 +9,18 @@ import io.github.jmgarridopaz.taskmanagement.hexagon.domain.TeamService;
 public class TranslatingTeamService implements TeamService {
 
 	private final ForGettingDepartments departmentRepository;
+	private final TeamTranslator teamTranslator;
 	
-	public TranslatingTeamService ( ForGettingDepartments departmentRepository ) {
+	public TranslatingTeamService ( ForGettingDepartments departmentRepository, TeamTranslator teamTranslator ) {
 		this.departmentRepository = departmentRepository;
+		this.teamTranslator = teamTranslator;
 	}
 
 	
 	@Override
 	public Team getTeamFromId ( String teamId ) {
 		Department department = this.departmentRepository.getDepartmentFromId ( teamId );
-		String teamName = department.name();
-		return new Team ( teamId, teamName );
+		return this.teamTranslator.fromDepartment(department);
 	}
 
 }

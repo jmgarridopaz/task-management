@@ -11,7 +11,7 @@ import io.github.jmgarridopaz.taskmanagement.hexagon.domain.TeamMember;
  */
 public interface ForAssigningTasks {
 
-	public List<TeamMember> getAllTeamMembers();
+	public TeamWithMembers getTeamOf ( String teamMemberEmail );
 	
 	public void assignTaskToTeamMember ( String taskTitle, LocalDate taskDeliveryDate, String teamMemberId );
 

@@ -25,9 +25,9 @@ public class TaskManager implements ForAssigningTasks {
 
 	
 	@Override
-	public List<TeamMember> getAllTeamMembers() {
-		List<TeamMember> teamMembers = this.teamMemberService.getAll();
-		return teamMembers;
+	public TeamWithMembers getTeamOf(String teamMemberEmail) {
+		TeamMember teamMember = this.teamMemberService.getByEmail ( teamMemberEmail );
+		teamMember.
 	}
 
 
