@@ -12,6 +12,19 @@ It has be done quickly so: there's no exception handling, no dependencies betwee
 
 It's going to be used by the employees of a company, which is structured in departments.
 
+DDD is based on the language, the ubiquitous language (UL), so that each bounded context (BC) has its own UL, with the terms and the meaning that has sense in that BC. We have 3 BC:
+
+- COMPANY: Employees and Departments management.
+
+- IAM (Identity and Access Management): Users of our application. Some terms of the UL: user, role, current user, login, password, ...
+
+- TASK MANAGEMENT: Team, team member, task, assignee, task owner, ...
+
+A user in the IAM context will be an employee in the Company context, and a team member in the Task Management context, but each context will have different data
+
+that will access our application, but we don't need the same data of that person in all the BCs. For example, for an employee we store the salary, but we don't need it 
+
+
 We already have 2 existing systems:
 
 - _Company Structure_, with information about departments
