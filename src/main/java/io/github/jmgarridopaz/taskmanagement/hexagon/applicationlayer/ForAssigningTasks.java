@@ -1,20 +1,14 @@
 package io.github.jmgarridopaz.taskmanagement.hexagon.applicationlayer;
 
-import java.time.LocalDate;
-import java.util.List;
-
-import io.github.jmgarridopaz.taskmanagement.hexagon.domain.TeamMember;
-
+import io.github.jmgarridopaz.taskmanagement.hexagon.domain.Task;
 
 /*
  * Driver Port
  */
 public interface ForAssigningTasks {
 
-	public TeamWithMembers getTeamOf ( String teamMemberEmail );
-	
-	public void assignTaskToTeamMember ( String taskTitle, LocalDate taskDeliveryDate, String teamMemberId );
+	public void assignTask ( AssignTaskRequest assignTaskRequest );
 
-	public TeamMemberWithTasks getTasksAssignedTo ( String teamMemberId );
+	public Task getTaskById ( String taskId );
 	
 }

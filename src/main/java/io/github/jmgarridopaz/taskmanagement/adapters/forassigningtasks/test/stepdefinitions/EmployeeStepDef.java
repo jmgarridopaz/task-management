@@ -1,11 +1,10 @@
 package io.github.jmgarridopaz.taskmanagement.adapters.forassigningtasks.test.stepdefinitions;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import io.cucumber.java.en.Given;
-import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teammemberservice.Employee;
 
+import io.cucumber.java.en.Given;
+import io.github.jmgarridopaz.taskmanagement.hexagon.acl.Employee;
 
 public class EmployeeStepDef {
 	
@@ -15,21 +14,16 @@ public class EmployeeStepDef {
 		this.scenarioContext = scenarioContext ;
 	}
 	
+	@Given("there exist this employee:")
+	public void there_exist_this_employee ( List<Map<String,String>> dataTable ) {
+		Map<String,String> row = dataTable.get(0);
+		String id = row.get("ID");
+		String firstName = row.get("FIRST_NAME");
+		String lastName = row.get("LAST_NAME");
+		String email = row.get("EMAIL");
+		String job = row.get("JOB");
+		Employee employee = new Employee(id, firstName, lastName, email, job);
+		this.scenarioContext.setEmployee(employee);
+	}
 	
-	@Given("there exists these employees:")
-    public void there_exists_these_employees ( List<Map<String,String>> dataTable) {
-		List<Employee> emps = new ArrayList<Employee>();
-		for ( Map<String,String> row : dataTable ) {
-			String id = row.get("EMP_ID");
-			String firstName = row.get("EMP_FIRST_NAME");
-			String lastName = row.get("EMP_LAST_NAME");
-			String email = row.get("EMP_EMAIL");
-			boolean isManager = "yes".equalsIgnoreCase(row.get("IS_MANAGER"));
-			String departmentId = row.get("DEP_ID");
-			Employee emp = new Employee(id, firstName, lastName, email, isManager, departmentId);
-			emps.add(emp);
-		}
-		this.scenarioContext.setEmployees(emps);
-    }
-
 }

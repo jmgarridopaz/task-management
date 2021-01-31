@@ -1,8 +1,9 @@
 package io.github.jmgarridopaz.taskmanagement.adapters.forassigningtasks.test.sut;
 
-import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teammemberservice.Employee;
-import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teamservice.Department;
+import io.github.jmgarridopaz.taskmanagement.hexagon.acl.Employee;
+import io.github.jmgarridopaz.taskmanagement.hexagon.acl.User;
 import io.github.jmgarridopaz.taskmanagement.hexagon.applicationlayer.ForAssigningTasks;
+
 
 public enum SystemUnderTest {
 
@@ -14,8 +15,8 @@ public enum SystemUnderTest {
 		this.instance = hexagonInitializer;
 	}
 
-	public static ForAssigningTasks initWith (Department[] departments, Employee[] employees ) {
-		return SystemUnderTest.HEXAGON_INITIALIZER.instance.initForAssigningTasksFrom(departments, employees);
+	public static ForAssigningTasks initWith (Employee employee, User user, String nextTaskId ) {
+		return SystemUnderTest.HEXAGON_INITIALIZER.instance.initForAssigningTasksFrom(employee,user,nextTaskId);
 	}
 	
 }

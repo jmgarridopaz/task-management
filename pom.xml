@@ -22,10 +22,13 @@
 		<java.version>1.8</java.version>
 		<!-- Compiler Plugin -->
 		<maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
-		<!-- Compiler Plugin -->
-		<maven.shade.plugin.version>3.2.4</maven.shade.plugin.version>
+		<!-- Dependency Plugin -->
+		<maven.dependency.plugin.version>3.1.2</maven.dependency.plugin.version>
+		<!-- Jar Plugin -->
+		<maven.jar.plugin.version>3.2.0</maven.jar.plugin.version>
 		<!-- Cucumber -->
 		<cucumber.version>6.9.1</cucumber.version>
+		<!-- JUnit -->
 		<junit.platform.version>1.7.0</junit.platform.version>
 		<junit.jupiter.engine.version>5.7.0</junit.jupiter.engine.version>
 	</properties>
@@ -56,7 +59,6 @@
 			<artifactId>junit-jupiter-engine</artifactId>
 			<version>${junit.jupiter.engine.version}</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -76,28 +78,38 @@
 					<showWarnings>true</showWarnings>
 				</configuration>
 			</plugin>
-			<!-- Executable JAR -->
+			<!-- Copy dependencies to be addressed by the executable jar -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>${maven.shade.plugin.version}</version>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>${maven.dependency.plugin.version}</version>
 				<executions>
 					<execution>
+						<id>copy-dependencies</id>
 						<phase>package</phase>
 						<goals>
-							<goal>shade</goal>
+							<goal>copy-dependencies</goal>
 						</goals>
 						<configuration>
-							<shadedArtifactAttached>true</shadedArtifactAttached>
-							<transformers>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>io.github.jmgarridopaz.taskmanagement.startup.TaskManagement</mainClass>
-								</transformer>
-							</transformers>
+							<outputDirectory>${project.build.directory}/lib/</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<!-- Executable jar -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven.jar.plugin.version}</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>io.github.jmgarridopaz.taskmanagement.startup.TaskManagement</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,14 +1,12 @@
-package io.github.jmgarridopaz.taskmanagement.hexagon
-;
-import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teammemberservice.ForGettingEmployees;
-import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teammemberservice.TeamMemberGetter;
-import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teamservice.ForGettingDepartments;
-import io.github.jmgarridopaz.taskmanagement.hexagon.acl.teamservice.TranslatingTeamService;
+package io.github.jmgarridopaz.taskmanagement.hexagon;
+
+import io.github.jmgarridopaz.taskmanagement.hexagon.acl.ForGettingEmployees;
+import io.github.jmgarridopaz.taskmanagement.hexagon.acl.ForGettingUsers;
+import io.github.jmgarridopaz.taskmanagement.hexagon.acl.TranslatingAssigneeService;
 import io.github.jmgarridopaz.taskmanagement.hexagon.applicationlayer.ForAssigningTasks;
 import io.github.jmgarridopaz.taskmanagement.hexagon.applicationlayer.TaskManager;
+import io.github.jmgarridopaz.taskmanagement.hexagon.domain.AssigneeService;
 import io.github.jmgarridopaz.taskmanagement.hexagon.domain.ForStoringTasks;
-import io.github.jmgarridopaz.taskmanagement.hexagon.domain.TeamService;
-import io.github.jmgarridopaz.taskmanagement.hexagon.domain.TeamMemberService;
 
 
 /*
@@ -17,21 +15,21 @@ import io.github.jmgarridopaz.taskmanagement.hexagon.domain.TeamMemberService;
 public class Hexagon {
 
 	// Driven ports
-	private final ForStoringTasks taskRepository;
-	private final ForGettingDepartments departmentRepository;
 	private final ForGettingEmployees employeeRepository;
+	private final ForGettingUsers userRepository;
+	private final ForStoringTasks taskRepository;
+
 	
-	public Hexagon(ForStoringTasks taskRepository, ForGettingDepartments departmentRepository, ForGettingEmployees employeeRepository) {
-		this.taskRepository = taskRepository;
-		this.departmentRepository = departmentRepository;
+	public Hexagon (  ForGettingEmployees employeeRepository, ForGettingUsers userRepository, ForStoringTasks taskRepository ) {
 		this.employeeRepository = employeeRepository;
+		this.userRepository = userRepository;
+		this.taskRepository = taskRepository;
 	}
 
 	// Driver port
 	public ForAssigningTasks forAssigningTasks() {
-		TeamService teamGroupService = new TranslatingTeamService(this.departmentRepository);
-		TeamMemberService teamMemberService = new TeamMemberGetter(this.employeeRepository);
-		return new TaskManager(teamGroupService, teamMemberService, this.taskRepository);
+		AssigneeService assigneeService = new TranslatingAssigneeService ( this.employeeRepository, this.userRepository);
+		return new TaskManager ( assigneeService, this.taskRepository );
 	}
 	
 }
