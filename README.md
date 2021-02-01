@@ -46,6 +46,8 @@ Configurable Dependency pattern allows us to swap external real world items (web
 
 ACL translation logic is covered by these tests too, since it is not technological stuff and so it belongs to the hexagon.
 
+Does this mean that we cannot just test the domain without the ACL? Absolutely no, you can mock the ACL as well. But that would be testing the inside of the hexagon, just like if you wanted to test any other component of the inside. And hexagonal architecture doesn't say anything about it.
+
 Here is a pretty cool Cucumber html test report, for the test case that I've implemented in the example:
 
 ![Task Management](test-report.png)
@@ -53,8 +55,6 @@ Here is a pretty cool Cucumber html test report, for the test case that I've imp
 As we can see, employee and user concepts appear in the test case but they don't belong to our domain, they belong to _Company_ and _Identity & Access_ external systems. Why is this? Because we are testing the whole hexagon including the ACL logic, not just the domain. So the data that feed our test case in the "given" clause are the data from the repositories (employees and users). And the driver actor of the real system is also an employee, who is the final real world user of the application, that's why it appears in the "AS a..." clause of the feature.
 
 Testing the hexagon in isolation driven by test cases, mocking external technologies, is one of the main goals of hexagonal architecture. Putting ACL logic outside the hexagon would break this.
-
-Does this mean that we cannot just test the domain without the ACL? Absolutely no, you can mock the ACL as well. But that would be testing the inside of the hexagon, just like if you wanted to test any other component of the inside. And hexagonal architecture doesn't say anything about it.
 
 ### Development environment:
 
